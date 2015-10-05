@@ -119,6 +119,24 @@
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="vza-tm-uta" id="rpw-So-Edh">
                                             <rect key="frame" x="0.0" y="0.0" width="320" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wDo-TG-GPo">
+                                                    <rect key="frame" x="60" y="7" width="73" height="30"/>
+                                                    <animations/>
+                                                    <state key="normal" title="Test write"/>
+                                                    <connections>
+                                                        <action selector="testSaveData:" destination="tbI-KU-0wl" eventType="touchUpInside" id="1ye-XC-QRe"/>
+                                                    </connections>
+                                                </button>
+                                                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cOp-gE-HTd">
+                                                    <rect key="frame" x="180" y="7" width="73" height="30"/>
+                                                    <animations/>
+                                                    <state key="normal" title="Test read"/>
+                                                    <connections>
+                                                        <action selector="testReadData:" destination="tbI-KU-0wl" eventType="touchUpInside" id="Tff-Wh-g6F"/>
+                                                    </connections>
+                                                </button>
+                                            </subviews>
                                             <animations/>
                                         </tableViewCellContentView>
                                         <animations/>

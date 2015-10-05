@@ -1,12 +1,16 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="9053" systemVersion="15A284" minimumToolsVersion="Xcode 7.0">
-    <entity name="SensorData" representedClassName="BIKESensorMO" syncable="YES">
+    <entity name="SensorData" representedClassName="BIKSensorDataMO" syncable="YES">
+        <attribute name="carbonmonoxide" optional="YES" attributeType="Float" defaultValueString="0.0" syncable="YES"/>
         <attribute name="deviceid" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <attribute name="humidity" optional="YES" attributeType="Float" defaultValueString="0.0" syncable="YES"/>
         <attribute name="latitude" optional="YES" attributeType="Double" defaultValueString="0.0" syncable="YES"/>
         <attribute name="longitude" optional="YES" attributeType="Double" defaultValueString="0.0" syncable="YES"/>
+        <attribute name="particles" optional="YES" attributeType="Float" defaultValueString="0.0" syncable="YES"/>
+        <attribute name="temperature" optional="YES" attributeType="Float" defaultValueString="0.0" syncable="YES"/>
         <attribute name="timestamp" optional="YES" attributeType="Date" syncable="YES"/>
     </entity>
     <elements>
-        <element name="SensorData" positionX="-63" positionY="-18" width="128" height="105"/>
+        <element name="SensorData" positionX="-63" positionY="-18" width="128" height="165"/>
     </elements>
 </model>

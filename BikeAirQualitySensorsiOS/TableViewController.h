@@ -7,15 +7,21 @@
 //
 
 #import <UIKit/UIKit.h>
+
 #import "BLE.h"
 #import <CoreData/CoreData.h>
+#import <CoreLocation/CoreLocation.h>
 
-@interface TableViewController : UITableViewController <BLEDelegate>
+#import "BIKSensorDataMO+CoreDataProperties.h"
+
+@interface TableViewController : UITableViewController <BLEDelegate, CLLocationManagerDelegate>
 {
     IBOutlet UIButton *btnConnect;
     IBOutlet UIActivityIndicatorView *indConnecting;
     IBOutlet UILabel *lblRSSI;
     IBOutlet UILabel *sensorValues;
+    
+    CLLocationManager *locationManager;
 }
 
 @property (strong, nonatomic) BLE *ble;

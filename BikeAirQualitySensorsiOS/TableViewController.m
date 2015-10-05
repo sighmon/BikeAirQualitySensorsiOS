@@ -32,6 +32,7 @@
     if (self) {
         // Setup CoreData
         [self initializeCoreData];
+        [self initializeCoreLocation];
     }
     return self;
 }
@@ -49,30 +50,6 @@
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
-}
-
-#pragma mark - CoreData
-
-- (void)initializeCoreData
-{
-    NSURL *modelURL = [[NSBundle mainBundle] URLForResource:@"SensorData" withExtension:@"momd"];
-    NSManagedObjectModel *mom = [[NSManagedObjectModel alloc] initWithContentsOfURL:modelURL];
-    NSAssert(mom != nil, @"Error initializing Managed Object Model");
-    
-    NSPersistentStoreCoordinator *psc = [[NSPersistentStoreCoordinator alloc] initWithManagedObjectModel:mom];
-    NSManagedObjectContext *moc = [[NSManagedObjectContext alloc] initWithConcurrencyType:NSMainQueueConcurrencyType];
-    [moc setPersistentStoreCoordinator:psc];
-    [self setManagedObjectContext:moc];
-    NSFileManager *fileManager = [NSFileManager defaultManager];
-    NSURL *documentsURL = [[fileManager URLsForDirectory:NSDocumentDirectory inDomains:NSUserDomainMask] lastObject];
-    NSURL *storeURL = [documentsURL URLByAppendingPathComponent:@"SensorData.sqlite"];
-    
-    dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void) {
-        NSError *error = nil;
-        NSPersistentStoreCoordinator *psc = [[self managedObjectContext] persistentStoreCoordinator];
-        NSPersistentStore *store = [psc addPersistentStoreWithType:NSSQLiteStoreType configuration:nil URL:storeURL options:nil error:&error];
-        NSAssert(store != nil, @"Error initializing PSC: %@\n%@", [error localizedDescription], [error userInfo]);
-    });
 }
 
 #pragma mark - BLE delegate
@@ -120,6 +97,14 @@ NSTimer *rssiTimer;
     NSLog(@"Length: %d", length);
     NSLog(@"Data: %s", data);
     sensorValues.text = [NSString stringWithFormat:@"%s", data];
+    
+    // TODO: Parse data and add it to CoreData.
+    
+    [self saveToCoreData:data];
+    
+    // TODO: Save to/append to file for the day's data?
+    
+    
 }
 
 #pragma mark - Actions
@@ -160,6 +145,87 @@ NSTimer *rssiTimer;
         [btnConnect setTitle:@"Connect" forState:UIControlStateNormal];
         [indConnecting stopAnimating];
     }
+}
+
+- (IBAction)testSaveData:(id)sender
+{
+    NSString *testString = @"t:28.4 h:18.0 C:344 *148*";
+    unsigned char *testChar = (unsigned char *) [testString UTF8String];
+    [self saveToCoreData:testChar];
+}
+
+- (IBAction)testReadData:(id)sender
+{
+    NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"SensorData"];
+    
+    NSError *error = nil;
+    NSArray *results = [[self managedObjectContext] executeFetchRequest:request error:&error];
+    if (!results) {
+        NSLog(@"Error fetching Employee objects: %@\n%@", [error localizedDescription], [error userInfo]);
+        abort();
+    } else {
+        NSLog(@"Results: %@", results);
+    }
+}
+
+#pragma mark - CoreData
+
+-(void)initializeCoreData
+{
+    NSURL *modelURL = [[NSBundle mainBundle] URLForResource:@"SensorData" withExtension:@"momd"];
+    NSManagedObjectModel *mom = [[NSManagedObjectModel alloc] initWithContentsOfURL:modelURL];
+    NSAssert(mom != nil, @"Error initializing Managed Object Model");
+    
+    NSPersistentStoreCoordinator *psc = [[NSPersistentStoreCoordinator alloc] initWithManagedObjectModel:mom];
+    NSManagedObjectContext *moc = [[NSManagedObjectContext alloc] initWithConcurrencyType:NSMainQueueConcurrencyType];
+    [moc setPersistentStoreCoordinator:psc];
+    [self setManagedObjectContext:moc];
+    NSFileManager *fileManager = [NSFileManager defaultManager];
+    NSURL *documentsURL = [[fileManager URLsForDirectory:NSDocumentDirectory inDomains:NSUserDomainMask] lastObject];
+    NSURL *storeURL = [documentsURL URLByAppendingPathComponent:@"SensorData.sqlite"];
+    
+    dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void) {
+        NSError *error = nil;
+        NSPersistentStoreCoordinator *psc = [[self managedObjectContext] persistentStoreCoordinator];
+        NSPersistentStore *store = [psc addPersistentStoreWithType:NSSQLiteStoreType configuration:nil URL:storeURL options:nil error:&error];
+        NSAssert(store != nil, @"Error initializing PSC: %@\n%@", [error localizedDescription], [error userInfo]);
+    });
+}
+
+- (void)saveToCoreData: (unsigned char *)data
+{
+    BIKSensorDataMO *sensorDataManagedObject = [NSEntityDescription insertNewObjectForEntityForName:@"SensorData" inManagedObjectContext:[self managedObjectContext]];
+    
+    // TODO: Parse data and save it.
+    
+    // TOFIX: dummy data for now.
+    sensorDataManagedObject.deviceid = 1;
+    sensorDataManagedObject.timestamp = [NSDate date];
+//    sensorDataManagedObject.latitude = ;
+//    sensorDataManagedObject.longitude = ;
+    sensorDataManagedObject.humidity = 20.0;
+    sensorDataManagedObject.temperature = 24.0;
+    sensorDataManagedObject.particles = 456.7;
+    sensorDataManagedObject.carbonmonoxide = 890.0;
+    
+    NSError *error = nil;
+    if ([[self managedObjectContext] save:&error] == NO) {
+        NSAssert(NO, @"Error saving context: %@\n%@", [error localizedDescription], [error userInfo]);
+    } else {
+        NSLog(@"Saved sensor data: %@", sensorDataManagedObject);
+    }
+}
+
+# pragma mark - CoreLocation
+
+-(void)initializeCoreLocation
+{
+    if (locationManager == nil) {
+        locationManager = [[CLLocationManager alloc] init];
+    }
+    
+    locationManager.delegate = self;
+    locationManager.desiredAccuracy = kCLLocationAccuracyBest;
 }
 
 @end
