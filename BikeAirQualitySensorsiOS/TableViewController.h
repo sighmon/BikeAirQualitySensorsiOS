@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "BLE.h"
+#import <CoreData/CoreData.h>
 
 @interface TableViewController : UITableViewController <BLEDelegate>
 {
@@ -18,5 +19,8 @@
 }
 
 @property (strong, nonatomic) BLE *ble;
+@property (strong) NSManagedObjectContext *managedObjectContext;
+
+- (void)initializeCoreData;
 
 @end

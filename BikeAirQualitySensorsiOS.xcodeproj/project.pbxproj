@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		056B7D571BC2313D00292D37 /* SensorData.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 056B7D551BC2313D00292D37 /* SensorData.xcdatamodeld */; };
+		056B7D591BC23E4100292D37 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 056B7D581BC23E4100292D37 /* CoreData.framework */; };
 		291C7BB71648AE9100403B08 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 291C7BB61648AE9100403B08 /* UIKit.framework */; };
 		291C7BB91648AE9100403B08 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 291C7BB81648AE9100403B08 /* Foundation.framework */; };
 		291C7BBB1648AE9100403B08 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 291C7BBA1648AE9100403B08 /* CoreGraphics.framework */; };
@@ -23,6 +25,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		056B7D561BC2313D00292D37 /* SensorData.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = SensorData.xcdatamodel; sourceTree = "<group>"; };
+		056B7D581BC23E4100292D37 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		291C7BB21648AE9100403B08 /* BikeAirQualitySensorsiOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BikeAirQualitySensorsiOS.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		291C7BB61648AE9100403B08 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		291C7BB81648AE9100403B08 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -50,6 +54,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				056B7D591BC23E4100292D37 /* CoreData.framework in Frameworks */,
 				298C8463164A0F000020AD9A /* CoreBluetooth.framework in Frameworks */,
 				291C7BB71648AE9100403B08 /* UIKit.framework in Frameworks */,
 				291C7BB91648AE9100403B08 /* Foundation.framework in Frameworks */,
@@ -80,6 +85,7 @@
 		291C7BB51648AE9100403B08 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				056B7D581BC23E4100292D37 /* CoreData.framework */,
 				29FD69E717BA35510015E258 /* BLE */,
 				298C8462164A0F000020AD9A /* CoreBluetooth.framework */,
 				291C7BB61648AE9100403B08 /* UIKit.framework */,
@@ -94,6 +100,7 @@
 			children = (
 				2950A9C8164A8459005C150E /* TableViewController.h */,
 				2950A9C9164A8459005C150E /* TableViewController.m */,
+				056B7D551BC2313D00292D37 /* SensorData.xcdatamodeld */,
 				291C7BC51648AE9100403B08 /* AppDelegate.h */,
 				291C7BC61648AE9100403B08 /* AppDelegate.m */,
 				291C7BCE1648AE9100403B08 /* MainStoryboard.storyboard */,
@@ -202,6 +209,7 @@
 				291C7BC71648AE9100403B08 /* AppDelegate.m in Sources */,
 				2950A9CA164A8459005C150E /* TableViewController.m in Sources */,
 				2932F6831813C4230049385E /* BLE.m in Sources */,
+				056B7D571BC2313D00292D37 /* SensorData.xcdatamodeld in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -332,6 +340,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		056B7D551BC2313D00292D37 /* SensorData.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				056B7D561BC2313D00292D37 /* SensorData.xcdatamodel */,
+			);
+			currentVersion = 056B7D561BC2313D00292D37 /* SensorData.xcdatamodel */;
+			path = SensorData.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 291C7BA91648AE9100403B08 /* Project object */;
 }
