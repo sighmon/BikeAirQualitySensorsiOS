@@ -3,6 +3,7 @@
     <entity name="SensorData" representedClassName="BIKSensorDataMO" syncable="YES">
         <attribute name="carbonmonoxide" optional="YES" attributeType="Float" defaultValueString="0.0" syncable="YES"/>
         <attribute name="deviceid" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <attribute name="heaterOn" optional="YES" attributeType="Boolean" syncable="YES"/>
         <attribute name="humidity" optional="YES" attributeType="Float" defaultValueString="0.0" syncable="YES"/>
         <attribute name="latitude" optional="YES" attributeType="Double" defaultValueString="0.0" syncable="YES"/>
         <attribute name="longitude" optional="YES" attributeType="Double" defaultValueString="0.0" syncable="YES"/>
@@ -11,6 +12,6 @@
         <attribute name="timestamp" optional="YES" attributeType="Date" syncable="YES"/>
     </entity>
     <elements>
-        <element name="SensorData" positionX="-63" positionY="-18" width="128" height="165"/>
+        <element name="SensorData" positionX="-63" positionY="-18" width="128" height="180"/>
     </elements>
 </model>

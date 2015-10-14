@@ -8,7 +8,19 @@
 
 #import "TableViewController.h"
 
-@interface TableViewController ()
+@interface TableViewController () {
+    
+    float _temperature;
+    float _humidity;
+    float _particles;
+    float _carbonMonoxide;
+    char _heaterOn;
+    
+    int _deviceid;
+    NSDate *_timestamp;
+    double _latitude;
+    double _longitude;
+}
 
 @end
 
@@ -94,13 +106,44 @@ NSTimer *rssiTimer;
 // When data is comming, this will be called
 -(void) bleDidReceiveData:(unsigned char *)data length:(int)length
 {
-    NSLog(@"Length: %d", length);
-    NSLog(@"Data: %s", data);
-    sensorValues.text = [NSString stringWithFormat:@"%s", data];
+    // Decode struct data
     
-    // TODO: Parse data and add it to CoreData.
+    struct SENSOR_READINGS {
+        float temperature;
+        float humidity;
+        float particles;
+        float carbonMonoxide;
+        char heaterOn;
+    };
     
-    [self saveToCoreData:data];
+    struct SENSOR_READINGS sensorReadings;
+    memcpy(&sensorReadings, data, sizeof(struct SENSOR_READINGS));
+    
+    _temperature = sensorReadings.temperature;
+    _humidity = sensorReadings.humidity;
+    _particles = sensorReadings.particles;
+    _carbonMonoxide = sensorReadings.carbonMonoxide;
+    _heaterOn = sensorReadings.heaterOn;
+    
+    _deviceid = 1;
+    _timestamp = [NSDate date];
+//    _latitude = ;
+//    _longitude = ;
+    
+    sensorValues.text = [NSString stringWithFormat:@"t: %.01f h: %.01f p: %.01f %@: %.01f",
+                         _temperature,
+                         _humidity,
+                         _particles,
+                         _heaterOn ? @"C" : @"c",
+                         _carbonMonoxide];
+    
+    NSLog(@"Length: %d, Raw data: %s", length, data);
+    NSLog(@"Data: %@", sensorValues.text);
+    
+    // Save to core data if the data size is 17
+    if ([self isLastDataValid] && length == 17) {
+        [self saveToCoreData];
+    }
     
     // TODO: Save to/append to file for the day's data?
     
@@ -149,15 +192,29 @@ NSTimer *rssiTimer;
 
 - (IBAction)testSaveData:(id)sender
 {
-    NSString *testString = @"t:28.4 h:18.0 C:344 *148*";
-    unsigned char *testChar = (unsigned char *) [testString UTF8String];
-    [self saveToCoreData:testChar];
+    _temperature = 23.1;
+    _humidity = 34.5;
+    _particles = 128.9;
+    _carbonMonoxide = 378.9;
+    _heaterOn = true;
+    
+    _deviceid = 1;
+    _timestamp = [NSDate date];
+    _latitude = 34.9290;
+    _longitude = 138.6010;
+    
+    if ([self isLastDataValid]) {
+        [self saveToCoreData];
+    }
 }
 
 - (IBAction)testReadData:(id)sender
 {
-    NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"SensorData"];
+    // TODO: Get this working
+    // https://developer.apple.com/library/ios/documentation/Cocoa/Conceptual/CoreData/FetchingObjects.html#//apple_ref/doc/uid/TP40001075-CH6-SW1
     
+    NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"SensorData"];
+    [request setReturnsObjectsAsFaults:NO];
     NSError *error = nil;
     NSArray *results = [[self managedObjectContext] executeFetchRequest:request error:&error];
     if (!results) {
@@ -192,27 +249,43 @@ NSTimer *rssiTimer;
     });
 }
 
-- (void)saveToCoreData: (unsigned char *)data
+- (void)saveToCoreData
 {
     BIKSensorDataMO *sensorDataManagedObject = [NSEntityDescription insertNewObjectForEntityForName:@"SensorData" inManagedObjectContext:[self managedObjectContext]];
     
-    // TODO: Parse data and save it.
-    
-    // TOFIX: dummy data for now.
-    sensorDataManagedObject.deviceid = 1;
-    sensorDataManagedObject.timestamp = [NSDate date];
-//    sensorDataManagedObject.latitude = ;
-//    sensorDataManagedObject.longitude = ;
-    sensorDataManagedObject.humidity = 20.0;
-    sensorDataManagedObject.temperature = 24.0;
-    sensorDataManagedObject.particles = 456.7;
-    sensorDataManagedObject.carbonmonoxide = 890.0;
+    sensorDataManagedObject.deviceid = _deviceid;
+    sensorDataManagedObject.timestamp = _timestamp;
+    sensorDataManagedObject.latitude = _latitude;
+    sensorDataManagedObject.longitude = _longitude;
+    sensorDataManagedObject.humidity = _humidity;
+    sensorDataManagedObject.temperature = _temperature;
+    sensorDataManagedObject.particles = _particles;
+    sensorDataManagedObject.carbonmonoxide = _carbonMonoxide;
+    sensorDataManagedObject.heaterOn = _heaterOn;
     
     NSError *error = nil;
     if ([[self managedObjectContext] save:&error] == NO) {
         NSAssert(NO, @"Error saving context: %@\n%@", [error localizedDescription], [error userInfo]);
     } else {
         NSLog(@"Saved sensor data: %@", sensorDataManagedObject);
+    }
+}
+
+# pragma mark - convinience functions
+
+- (bool)isLastDataValid
+{
+    if (_humidity != 0 &&
+        _temperature != 0 &&
+        _particles != 0 &&
+        _carbonMonoxide != 0 &&
+        _deviceid != 0 &&
+        _timestamp &&
+        _latitude != 0 &&
+        _longitude != 0) {
+        return true;
+    } else {
+        return false;
     }
 }
 
@@ -225,7 +298,46 @@ NSTimer *rssiTimer;
     }
     
     locationManager.delegate = self;
+    [locationManager requestWhenInUseAuthorization];
     locationManager.desiredAccuracy = kCLLocationAccuracyBest;
+    
+    // Set a movement threshold for new events.
+    locationManager.distanceFilter = 5; // meters
+    
+    [locationManager requestLocation];
+    
+    [locationManager startUpdatingLocation];
+    [locationManager startMonitoringSignificantLocationChanges];
+    
+}
+
+-(void)locationManager:(CLLocationManager *)manager didDetermineState:(CLRegionState)state forRegion:(CLRegion *)region
+{
+    NSLog(@"Location manager state: %ld, region: %@", (long)state, region);
+}
+
+-(void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray *)locations
+{
+    // If it's a relatively recent event, turn off updates to save power.
+    CLLocation *location = [locations lastObject];
+    _latitude = location.coordinate.latitude;
+    _longitude = location.coordinate.longitude;
+    NSDate *eventDate = location.timestamp;
+    NSTimeInterval howRecent = [eventDate timeIntervalSinceNow];
+    if (fabs(howRecent) < 15.0) {
+        // If the event is recent, do something with it.
+        NSLog(@"latitude %+.6f, longitude %+.6f\n",
+              location.coordinate.latitude,
+              location.coordinate.longitude);
+        
+        _latitude = location.coordinate.latitude;
+        _longitude = location.coordinate.longitude;
+    }
+}
+
+-(void)locationManager:(CLLocationManager *)manager didFailWithError:(NSError *)error
+{
+    NSLog(@"Location manager error: %@", error);
 }
 
 @end

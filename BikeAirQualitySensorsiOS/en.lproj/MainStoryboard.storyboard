@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9052" systemVersion="15A284" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="tbI-KU-0wl">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9058" systemVersion="15A284" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="tbI-KU-0wl">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9040"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9048"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
@@ -87,15 +87,8 @@
                                             <rect key="frame" x="0.0" y="0.0" width="320" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Reading:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jX3-kY-i5D">
-                                                    <rect key="frame" x="20" y="11.5" width="67" height="20.5"/>
-                                                    <animations/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                                    <color key="highlightedColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                                </label>
-                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="249" text="t: --- h: --- s: --- *---*" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsLetterSpacingToFitWidth="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1aN-Pp-VaR">
-                                                    <rect key="frame" x="95" y="11" width="205" height="20.5"/>
+                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="249" text="t: --- h: --- p: --- c: ---" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsLetterSpacingToFitWidth="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1aN-Pp-VaR">
+                                                    <rect key="frame" x="20" y="8" width="280" height="27.5"/>
                                                     <animations/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <color key="textColor" red="0.1944211032" green="0.19533934140000001" blue="0.67883831520000004" alpha="1" colorSpace="calibratedRGB"/>
@@ -104,11 +97,10 @@
                                             </subviews>
                                             <animations/>
                                             <constraints>
-                                                <constraint firstItem="1aN-Pp-VaR" firstAttribute="leading" secondItem="jX3-kY-i5D" secondAttribute="trailing" constant="8" id="06u-a2-B4G"/>
-                                                <constraint firstAttribute="centerY" secondItem="jX3-kY-i5D" secondAttribute="centerY" id="h1a-y8-MVY"/>
-                                                <constraint firstItem="jX3-kY-i5D" firstAttribute="leading" secondItem="H3L-2k-PKR" secondAttribute="leadingMargin" constant="12" id="tF7-Yu-LIW"/>
+                                                <constraint firstAttribute="bottomMargin" secondItem="1aN-Pp-VaR" secondAttribute="bottom" id="5oL-QT-Ocx"/>
+                                                <constraint firstItem="1aN-Pp-VaR" firstAttribute="leading" secondItem="H3L-2k-PKR" secondAttribute="leadingMargin" constant="12" id="Swz-QD-I7f"/>
+                                                <constraint firstItem="1aN-Pp-VaR" firstAttribute="top" secondItem="H3L-2k-PKR" secondAttribute="topMargin" id="mPs-J7-NZ5"/>
                                                 <constraint firstAttribute="trailingMargin" secondItem="1aN-Pp-VaR" secondAttribute="trailing" constant="12" id="u8K-eA-tj4"/>
-                                                <constraint firstItem="1aN-Pp-VaR" firstAttribute="bottom" secondItem="jX3-kY-i5D" secondAttribute="bottom" id="znh-Hs-lXi"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <animations/>

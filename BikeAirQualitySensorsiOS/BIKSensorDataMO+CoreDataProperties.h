@@ -2,7 +2,7 @@
 //  BIKSensorDataMO+CoreDataProperties.h
 //  BikeAirQualitySensorsiOS
 //
-//  Created by Simon Loffler on 5/10/2015.
+//  Created by Simon Loffler on 10/10/2015.
 //  Copyright © 2015 RedBearLab. All rights reserved.
 //
 //  Choose "Create NSManagedObject Subclass…" from the Core Data editor menu
@@ -15,14 +15,15 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface BIKSensorDataMO (CoreDataProperties)
 
+@property (nonatomic) float carbonmonoxide;
 @property (nonatomic) int16_t deviceid;
-@property (nonatomic) NSDate *timestamp;
+@property (nonatomic) BOOL heaterOn;
+@property (nonatomic) float humidity;
 @property (nonatomic) double latitude;
 @property (nonatomic) double longitude;
-@property (nonatomic) float temperature;
-@property (nonatomic) float humidity;
 @property (nonatomic) float particles;
-@property (nonatomic) float carbonmonoxide;
+@property (nonatomic) float temperature;
+@property (nonatomic) NSDate *timestamp;
 
 @end
 
