@@ -190,38 +190,78 @@ NSTimer *rssiTimer;
     }
 }
 
-- (IBAction)testSaveData:(id)sender
+- (IBAction)exportToCSV:(id)sender
 {
-    _temperature = 23.1;
-    _humidity = 34.5;
-    _particles = 128.9;
-    _carbonMonoxide = 378.9;
-    _heaterOn = true;
-    
-    _deviceid = 1;
-    _timestamp = [NSDate date];
-    _latitude = 34.9290;
-    _longitude = 138.6010;
-    
-    if ([self isLastDataValid]) {
-        [self saveToCoreData];
-    }
-}
-
-- (IBAction)testReadData:(id)sender
-{
-    // TODO: Get this working
-    // https://developer.apple.com/library/ios/documentation/Cocoa/Conceptual/CoreData/FetchingObjects.html#//apple_ref/doc/uid/TP40001075-CH6-SW1
-    
+    // Export to a CSV that you can download via iTunes
     NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"SensorData"];
     [request setReturnsObjectsAsFaults:NO];
     NSError *error = nil;
     NSArray *results = [[self managedObjectContext] executeFetchRequest:request error:&error];
     if (!results) {
-        NSLog(@"Error fetching Employee objects: %@\n%@", [error localizedDescription], [error userInfo]);
+        NSLog(@"Error fetching SensorData objects: %@\n%@", [error localizedDescription], [error userInfo]);
         abort();
     } else {
-        NSLog(@"Results: %@", results);
+        NSLog(@"Loading results...");
+        // Loop thorugh the saved data and write to a CSV
+        NSMutableArray *loadedData = [[NSMutableArray alloc] init];
+        [loadedData addObject: @"deviceid, timestamp, latitude, longitude, humidity, temperature, particles, carbonmonoxide, heaterOn" ];
+
+        for (BIKSensorDataMO *result in results) {
+            
+            // Set date to ISO 8601
+            NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+            NSLocale *adelaideLocale = [NSLocale localeWithLocaleIdentifier:@"Australia/Adelaide"];
+            [dateFormatter setLocale:adelaideLocale];
+            [dateFormatter setDateFormat:@"yyyy-MM-dd'T'HH:mm:ssZZZZZ"];
+            NSString *iso8601String = [dateFormatter stringFromDate:result.timestamp];
+            
+            // Add it to the array of CoreData
+            [loadedData addObject:[NSString stringWithFormat:@"%hd, %@, %f, %f, %f, %f, %f, %f, %hhd",
+                                   result.deviceid,
+                                   iso8601String,
+                                   result.latitude,
+                                   result.longitude,
+                                   result.humidity,
+                                   result.temperature,
+                                   result.particles,
+                                   result.carbonmonoxide,
+                                   (char)result.heaterOn]];
+        }
+        
+        if (loadedData.count > 1) {
+            NSLog(@"Loaded %lu results, saving to a file.", (unsigned long)loadedData.count);
+            // Export to a file
+            [self writeToTextFile:[loadedData componentsJoinedByString:@" \n"]];
+        } else {
+            NSLog(@"ERROR: no results loaded.. sadface.");
+        }
+    }
+}
+
+#pragma mark - File manager
+
+//Method writes a string to a text file
+-(void)writeToTextFile: (NSString *)dataString
+{
+    // Get the documents directory:
+    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString *documentsDirectory = [paths lastObject];
+    
+    // Make a file name to write the data to using the documents directory
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    NSLocale *adelaideLocale = [NSLocale localeWithLocaleIdentifier:@"Australia/Adelaide"];
+    [dateFormatter setLocale:adelaideLocale];
+    [dateFormatter setDateFormat:@"yyyy-MM-dd-HH.mm.ss"];
+    NSString *dateString = [dateFormatter stringFromDate:[NSDate date]];
+    
+    NSString *filename = [NSString stringWithFormat:@"sensor-data-%@.csv", dateString];
+    NSString *path = [documentsDirectory stringByAppendingPathComponent:filename];
+    NSError *error;
+    [dataString writeToFile:path atomically:YES encoding:NSUTF8StringEncoding error:&error];
+    if (!error) {
+        NSLog(@"File successfully created: %@", filename);
+    } else {
+        NSLog(@"ERROR writing file: %@\n%@", [error localizedDescription], [error userInfo]);
     }
 }
 
