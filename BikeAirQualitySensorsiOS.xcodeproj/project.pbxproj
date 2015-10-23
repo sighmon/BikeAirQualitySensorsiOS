@@ -12,6 +12,7 @@
 		056B7D5E1BC25B6700292D37 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 056B7D5D1BC25B6700292D37 /* CoreLocation.framework */; };
 		056B7D661BC2731C00292D37 /* BIKSensorDataMO+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = 056B7D631BC2731C00292D37 /* BIKSensorDataMO+CoreDataProperties.m */; };
 		056B7D671BC2731C00292D37 /* BIKSensorDataMO.m in Sources */ = {isa = PBXBuildFile; fileRef = 056B7D651BC2731C00292D37 /* BIKSensorDataMO.m */; };
+		05D0469F1BD3DEED00391727 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 05D0469E1BD3DEED00391727 /* Images.xcassets */; };
 		291C7BB71648AE9100403B08 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 291C7BB61648AE9100403B08 /* UIKit.framework */; };
 		291C7BB91648AE9100403B08 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 291C7BB81648AE9100403B08 /* Foundation.framework */; };
 		291C7BBB1648AE9100403B08 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 291C7BBA1648AE9100403B08 /* CoreGraphics.framework */; };
@@ -35,6 +36,7 @@
 		056B7D631BC2731C00292D37 /* BIKSensorDataMO+CoreDataProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "BIKSensorDataMO+CoreDataProperties.m"; path = "BikeAirQualitySensorsiOS/BIKSensorDataMO+CoreDataProperties.m"; sourceTree = "<group>"; };
 		056B7D641BC2731C00292D37 /* BIKSensorDataMO.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BIKSensorDataMO.h; path = BikeAirQualitySensorsiOS/BIKSensorDataMO.h; sourceTree = "<group>"; };
 		056B7D651BC2731C00292D37 /* BIKSensorDataMO.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BIKSensorDataMO.m; path = BikeAirQualitySensorsiOS/BIKSensorDataMO.m; sourceTree = "<group>"; };
+		05D0469E1BD3DEED00391727 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		291C7BB21648AE9100403B08 /* BikeAirQualitySensorsiOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BikeAirQualitySensorsiOS.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		291C7BB61648AE9100403B08 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		291C7BB81648AE9100403B08 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -118,6 +120,7 @@
 				291C7BC51648AE9100403B08 /* AppDelegate.h */,
 				291C7BC61648AE9100403B08 /* AppDelegate.m */,
 				291C7BCE1648AE9100403B08 /* MainStoryboard.storyboard */,
+				05D0469E1BD3DEED00391727 /* Images.xcassets */,
 				291C7BBD1648AE9100403B08 /* Supporting Files */,
 			);
 			path = BikeAirQualitySensorsiOS;
@@ -207,6 +210,7 @@
 				291C7BC11648AE9100403B08 /* InfoPlist.strings in Resources */,
 				291C7BC91648AE9100403B08 /* Default.png in Resources */,
 				291C7BCB1648AE9100403B08 /* Default@2x.png in Resources */,
+				05D0469F1BD3DEED00391727 /* Images.xcassets in Resources */,
 				291C7BCD1648AE9100403B08 /* Default-568h@2x.png in Resources */,
 				291C7BD01648AE9100403B08 /* MainStoryboard.storyboard in Resources */,
 			);
@@ -311,6 +315,8 @@
 		291C7BD71648AE9100403B08 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "BikeAirQualitySensorsiOS/BikeAirQualitySensorsiOS-Prefix.pch";
@@ -324,6 +330,8 @@
 		291C7BD81648AE9100403B08 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "BikeAirQualitySensorsiOS/BikeAirQualitySensorsiOS-Prefix.pch";

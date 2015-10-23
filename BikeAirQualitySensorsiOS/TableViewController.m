@@ -45,6 +45,9 @@
         // Setup CoreData
         [self initializeCoreData];
         [self initializeCoreLocation];
+        
+        // Disable app sleeping
+        [[UIApplication sharedApplication] setIdleTimerDisabled:YES];
     }
     return self;
 }
@@ -340,6 +343,8 @@ NSTimer *rssiTimer;
     locationManager.delegate = self;
     [locationManager requestWhenInUseAuthorization];
     locationManager.desiredAccuracy = kCLLocationAccuracyBest;
+    locationManager.pausesLocationUpdatesAutomatically = YES;
+    [locationManager setActivityType:CLActivityTypeFitness];
     
     // Set a movement threshold for new events.
     locationManager.distanceFilter = 5; // meters
