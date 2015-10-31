@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9058" systemVersion="15A284" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="tbI-KU-0wl">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9059" systemVersion="15B42" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="tbI-KU-0wl">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9048"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9049"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
@@ -67,11 +67,18 @@
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <color key="highlightedColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 </label>
+                                                <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" progress="0.10000000000000001" translatesAutoresizingMaskIntoConstraints="NO" id="7Ci-cm-OqB">
+                                                    <rect key="frame" x="64" y="21" width="196" height="2"/>
+                                                    <animations/>
+                                                </progressView>
                                             </subviews>
                                             <animations/>
                                             <constraints>
                                                 <constraint firstAttribute="centerY" secondItem="u91-cy-4pP" secondAttribute="centerY" id="Ca3-Y6-tbt"/>
+                                                <constraint firstItem="7Ci-cm-OqB" firstAttribute="centerY" secondItem="naS-nl-BpZ" secondAttribute="centerY" id="Qjg-qg-xCF"/>
+                                                <constraint firstItem="7Ci-cm-OqB" firstAttribute="leading" secondItem="u91-cy-4pP" secondAttribute="trailing" constant="8" id="oD9-Jv-PM7"/>
                                                 <constraint firstItem="u91-cy-4pP" firstAttribute="leading" secondItem="naS-nl-BpZ" secondAttribute="leadingMargin" constant="12" id="qqA-6k-Nv3"/>
+                                                <constraint firstItem="uXY-xl-iSl" firstAttribute="leading" secondItem="7Ci-cm-OqB" secondAttribute="trailing" constant="8" id="y9u-pf-amc"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <animations/>
@@ -194,6 +201,7 @@
                         <outlet property="btnConnect" destination="amg-mZ-kBR" id="dLG-RS-m2z"/>
                         <outlet property="indConnecting" destination="o6R-PA-ISX" id="jbP-Rq-EgC"/>
                         <outlet property="lblRSSI" destination="uXY-xl-iSl" id="zZ1-Vz-yQa"/>
+                        <outlet property="rssiProgressView" destination="7Ci-cm-OqB" id="fdR-dL-jfJ"/>
                         <outlet property="sensorValues" destination="1aN-Pp-VaR" id="0b0-aZ-2j2"/>
                     </connections>
                 </tableViewController>

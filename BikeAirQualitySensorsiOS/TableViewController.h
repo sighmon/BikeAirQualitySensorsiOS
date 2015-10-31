@@ -19,6 +19,7 @@
     IBOutlet UIButton *btnConnect;
     IBOutlet UIActivityIndicatorView *indConnecting;
     IBOutlet UILabel *lblRSSI;
+    IBOutlet UIProgressView *rssiProgressView;
     IBOutlet UILabel *sensorValues;
     
     CLLocationManager *locationManager;

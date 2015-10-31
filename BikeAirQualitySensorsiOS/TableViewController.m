@@ -79,6 +79,7 @@ NSTimer *rssiTimer;
     [indConnecting stopAnimating];
     
     lblRSSI.text = @"---";
+    [rssiProgressView setProgress:0.1 animated:YES];
     sensorValues.text = @"t: --- h: --- s: --- *---*";
     
     [rssiTimer invalidate];
@@ -88,6 +89,19 @@ NSTimer *rssiTimer;
 -(void) bleDidUpdateRSSI:(NSNumber *) rssi
 {
     lblRSSI.text = rssi.stringValue;
+    
+    // Map the values to the progress bar
+    // -30 (close) to -100 (far)
+    CGFloat const inMin = -100.0;
+    CGFloat const inMax = -30.0;
+    
+    CGFloat const outMin = 0.0;
+    CGFloat const outMax = 1.0;
+    
+    CGFloat in = [rssi floatValue];
+    CGFloat out = outMin + (outMax - outMin) * (in - inMin) / (inMax - inMin);
+    
+    [rssiProgressView setProgress:out animated:YES];
 }
 
 -(void) readRSSITimer:(NSTimer *)timer
