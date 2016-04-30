@@ -101,11 +101,18 @@
                                                     <color key="textColor" red="0.1944211032" green="0.19533934140000001" blue="0.67883831520000004" alpha="1" colorSpace="calibratedRGB"/>
                                                     <color key="highlightedColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 </label>
+                                                <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" hidesWhenStopped="YES" style="white" translatesAutoresizingMaskIntoConstraints="NO" id="o6R-PA-ISX">
+                                                    <rect key="frame" x="280" y="12" width="20" height="20"/>
+                                                    <animations/>
+                                                    <color key="color" red="0.1944211032" green="0.19533934140000001" blue="0.67883831520000004" alpha="1" colorSpace="calibratedRGB"/>
+                                                </activityIndicatorView>
                                             </subviews>
                                             <animations/>
                                             <constraints>
                                                 <constraint firstAttribute="bottomMargin" secondItem="1aN-Pp-VaR" secondAttribute="bottom" id="5oL-QT-Ocx"/>
                                                 <constraint firstItem="1aN-Pp-VaR" firstAttribute="leading" secondItem="H3L-2k-PKR" secondAttribute="leadingMargin" constant="12" id="Swz-QD-I7f"/>
+                                                <constraint firstItem="o6R-PA-ISX" firstAttribute="centerY" secondItem="H3L-2k-PKR" secondAttribute="centerY" id="a9T-Np-zXM"/>
+                                                <constraint firstAttribute="trailingMargin" secondItem="o6R-PA-ISX" secondAttribute="trailing" constant="12" id="eIC-vd-y2H"/>
                                                 <constraint firstItem="1aN-Pp-VaR" firstAttribute="top" secondItem="H3L-2k-PKR" secondAttribute="topMargin" id="mPs-J7-NZ5"/>
                                                 <constraint firstAttribute="trailingMargin" secondItem="1aN-Pp-VaR" secondAttribute="trailing" constant="12" id="u8K-eA-tj4"/>
                                             </constraints>
@@ -167,26 +174,28 @@
                                             <constraint firstItem="amg-mZ-kBR" firstAttribute="top" secondItem="HNl-51-S4g" secondAttribute="top" constant="6" id="LiG-Fa-XvB"/>
                                         </constraints>
                                     </tableViewCell>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="blue" indentationWidth="10" rowHeight="67" id="29N-VK-n7R">
-                                        <rect key="frame" x="0.0" y="252" width="320" height="67"/>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="blue" indentationWidth="10" rowHeight="319" id="29N-VK-n7R">
+                                        <rect key="frame" x="0.0" y="252" width="320" height="319"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="29N-VK-n7R" id="6F1-ih-h5X">
-                                            <rect key="frame" x="0.0" y="0.0" width="320" height="66.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="320" height="318.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" hidesWhenStopped="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="o6R-PA-ISX">
-                                                    <rect key="frame" x="142" y="13" width="37" height="37"/>
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5GO-Of-Tqm" customClass="LineChartView" customModule="Charts">
+                                                    <rect key="frame" x="0.0" y="0.0" width="320" height="318.5"/>
                                                     <animations/>
-                                                    <color key="color" red="0.1944211032" green="0.19533934140000001" blue="0.67883831520000004" alpha="1" colorSpace="calibratedRGB"/>
-                                                </activityIndicatorView>
+                                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                </view>
                                             </subviews>
                                             <animations/>
+                                            <constraints>
+                                                <constraint firstItem="5GO-Of-Tqm" firstAttribute="leading" secondItem="6F1-ih-h5X" secondAttribute="leadingMargin" constant="-8" id="1Og-zQ-WJF"/>
+                                                <constraint firstAttribute="bottomMargin" secondItem="5GO-Of-Tqm" secondAttribute="bottom" constant="-8" id="1eV-uY-ul8"/>
+                                                <constraint firstItem="5GO-Of-Tqm" firstAttribute="top" secondItem="6F1-ih-h5X" secondAttribute="topMargin" constant="-8" id="YYw-cL-8ER"/>
+                                                <constraint firstAttribute="trailingMargin" secondItem="5GO-Of-Tqm" secondAttribute="trailing" constant="-8" id="y8l-nq-QYz"/>
+                                            </constraints>
                                         </tableViewCellContentView>
                                         <animations/>
-                                        <constraints>
-                                            <constraint firstItem="o6R-PA-ISX" firstAttribute="top" secondItem="29N-VK-n7R" secondAttribute="top" constant="13" id="fxb-y6-V8A"/>
-                                            <constraint firstItem="o6R-PA-ISX" firstAttribute="centerX" secondItem="29N-VK-n7R" secondAttribute="centerX" id="xxo-iE-z86"/>
-                                        </constraints>
                                     </tableViewCell>
                                 </cells>
                             </tableViewSection>

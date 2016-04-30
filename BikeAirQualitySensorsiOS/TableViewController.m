@@ -144,8 +144,10 @@ NSTimer *rssiTimer;
     
     _deviceid = 1;
     _timestamp = [NSDate date];
-//    _latitude = ;
-//    _longitude = ;
+    
+    // TODO: Use this graph framework to plot in realtime
+    // http://www.appcoda.com/ios-charts-api-tutorial/
+    // https://github.com/danielgindi/ios-charts
     
     sensorValues.text = [NSString stringWithFormat:@"t: %.01f h: %.01f p: %.01f %@: %.01f",
                          _temperature,
@@ -161,9 +163,6 @@ NSTimer *rssiTimer;
     if ([self isLastDataValid] && length == 17) {
         [self saveToCoreData];
     }
-    
-    // TODO: Save to/append to file for the day's data?
-    
     
 }
 

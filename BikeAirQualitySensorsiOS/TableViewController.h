@@ -21,6 +21,7 @@
     IBOutlet UILabel *lblRSSI;
     IBOutlet UIProgressView *rssiProgressView;
     IBOutlet UILabel *sensorValues;
+//    IBOutlet LineChartView *lineChart;
     
     CLLocationManager *locationManager;
 }
