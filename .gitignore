@@ -24,7 +24,7 @@ xcuserdata
 *.xcscmblueprint
 
 ## Raw image dir
-00-bike-air-sensors-icon*
+00-*
 
 ## Obj-C/Swift specific
 *.hmap
