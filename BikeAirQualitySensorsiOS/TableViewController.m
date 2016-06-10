@@ -123,6 +123,8 @@ NSTimer *rssiTimer;
 // When data is comming, this will be called
 -(void) bleDidReceiveData:(unsigned char *)data length:(int)length
 {
+    // TODO: Work out why the RedBear Duo data is buffered to 80 bytes here.
+    
     // Decode struct data
     
     struct SENSOR_READINGS {
@@ -133,35 +135,50 @@ NSTimer *rssiTimer;
         char heaterOn;
     };
     
-    struct SENSOR_READINGS sensorReadings;
-    memcpy(&sensorReadings, data, sizeof(struct SENSOR_READINGS));
+    // If the data packet from ble is bigger than the struct, loop through each struct
+    // Handles the case when 80 byte packets are received from the RedBear Duo
     
-    _temperature = sensorReadings.temperature;
-    _humidity = sensorReadings.humidity;
-    _particles = sensorReadings.particles;
-    _carbonMonoxide = sensorReadings.carbonMonoxide;
-    _heaterOn = sensorReadings.heaterOn;
-    
-    _deviceid = 1;
-    _timestamp = [NSDate date];
-    
-    // TODO: Use this graph framework to plot in realtime
-    // http://www.appcoda.com/ios-charts-api-tutorial/
-    // https://github.com/danielgindi/ios-charts
-    
-    sensorValues.text = [NSString stringWithFormat:@"t: %.01f h: %.01f p: %.01f %@: %.01f",
-                         _temperature,
-                         _humidity,
-                         _particles,
-                         _heaterOn ? @"C" : @"c",
-                         _carbonMonoxide];
-    
-    NSLog(@"Length: %d, Raw data: %s", length, data);
-    NSLog(@"Data: %@", sensorValues.text);
-    
-    // Save to core data if the data size is 17
-    if ([self isLastDataValid] && length == 17) {
-        [self saveToCoreData];
+    while (length >= sizeof(struct SENSOR_READINGS)) {
+        
+        struct SENSOR_READINGS sensorReadings;
+        memcpy(&sensorReadings, data, sizeof(struct SENSOR_READINGS));
+        
+        _temperature = sensorReadings.temperature;
+        _humidity = sensorReadings.humidity;
+        _particles = sensorReadings.particles;
+        _carbonMonoxide = sensorReadings.carbonMonoxide;
+        _heaterOn = sensorReadings.heaterOn;
+        
+        _deviceid = 1;
+        _timestamp = [NSDate date];
+        
+        // TODO: Use this graph framework to plot in realtime
+        // http://www.appcoda.com/ios-charts-api-tutorial/
+        // https://github.com/danielgindi/ios-charts
+        
+        sensorValues.text = [NSString stringWithFormat:@"t: %.01f h: %.01f p: %.01f %@: %.01f",
+                             _temperature,
+                             _humidity,
+                             _particles,
+                             _heaterOn ? @"C" : @"c",
+                             _carbonMonoxide];
+        
+        NSMutableString *hexString = [NSMutableString stringWithCapacity:length * 2];
+        
+        for (int i = 0; i < length; i++) {
+            [hexString appendFormat:@"%02x", (unsigned int)data[i]];
+        }
+        
+        NSLog(@"Length: %d, Raw data: %@", length, hexString);
+        NSLog(@"Data: %@", sensorValues.text);
+        
+        // Save to core data if the data size is 20
+        if ([self isLastDataValid] && sizeof(struct SENSOR_READINGS) == 20) {
+            [self saveToCoreData];
+        }
+        
+        data += sizeof(struct SENSOR_READINGS);
+        length -= sizeof(struct SENSOR_READINGS);
     }
     
 }
