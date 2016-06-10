@@ -159,8 +159,8 @@ NSTimer *rssiTimer;
     NSLog(@"Length: %d, Raw data: %s", length, data);
     NSLog(@"Data: %@", sensorValues.text);
     
-    // Save to core data if the data size is 17
-    if ([self isLastDataValid] && length == 17) {
+    // Save to core data if the data size is 17 (Arduino) or 20 (Redbear Duo)
+    if ([self isLastDataValid] && length >= 17 && length <= 20) {
         [self saveToCoreData];
     }
     
