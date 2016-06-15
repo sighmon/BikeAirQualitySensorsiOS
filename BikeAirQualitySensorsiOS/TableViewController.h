@@ -14,14 +14,16 @@
 
 #import "BIKSensorDataMO+CoreDataProperties.h"
 
-@interface TableViewController : UITableViewController <BLEDelegate, CLLocationManagerDelegate>
+#import "BEMSimpleLineGraphView.h"
+
+@interface TableViewController : UITableViewController <BLEDelegate, CLLocationManagerDelegate, BEMSimpleLineGraphDataSource, BEMSimpleLineGraphDelegate>
 {
     IBOutlet UIButton *btnConnect;
     IBOutlet UIActivityIndicatorView *indConnecting;
     IBOutlet UILabel *lblRSSI;
     IBOutlet UIProgressView *rssiProgressView;
     IBOutlet UILabel *sensorValues;
-//    IBOutlet LineChartView *lineChart;
+    IBOutlet BEMSimpleLineGraphView *lineChartView;
     
     CLLocationManager *locationManager;
 }

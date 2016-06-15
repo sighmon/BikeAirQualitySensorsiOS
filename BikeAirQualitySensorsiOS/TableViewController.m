@@ -59,6 +59,9 @@
     ble = [[BLE alloc] init];
     [ble controlSetup];
     ble.delegate = self;
+    
+    // Setup graph
+    lineChartView.enableBezierCurve = YES;
 }
 
 - (void)didReceiveMemoryWarning
@@ -396,6 +399,19 @@ NSTimer *rssiTimer;
 -(void)locationManager:(CLLocationManager *)manager didFailWithError:(NSError *)error
 {
     NSLog(@"Location manager error: %@", error);
+}
+
+#pragma mark - Line graph delegate
+
+-(NSInteger)numberOfPointsInLineGraph:(BEMSimpleLineGraphView *)graph
+{
+    return 3;
+}
+
+-(CGFloat)lineGraph:(BEMSimpleLineGraphView *)graph valueForPointAtIndex:(NSInteger)index
+{
+    NSArray *data = @[@1.0f, @4.0f, @3.0f];
+    return [data[index] floatValue];
 }
 
 @end

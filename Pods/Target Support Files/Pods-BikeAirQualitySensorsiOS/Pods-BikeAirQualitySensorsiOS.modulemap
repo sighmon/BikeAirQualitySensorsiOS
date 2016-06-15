@@ -1,0 +1,6 @@
+framework module Pods_BikeAirQualitySensorsiOS {
+  umbrella header "Pods-BikeAirQualitySensorsiOS-umbrella.h"
+
+  export *
+  module * { export * }
+}

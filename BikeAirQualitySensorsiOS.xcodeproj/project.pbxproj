@@ -26,6 +26,7 @@
 		2932F6831813C4230049385E /* BLE.m in Sources */ = {isa = PBXBuildFile; fileRef = 2932F6811813C4230049385E /* BLE.m */; };
 		2950A9CA164A8459005C150E /* TableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2950A9C9164A8459005C150E /* TableViewController.m */; };
 		298C8463164A0F000020AD9A /* CoreBluetooth.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 298C8462164A0F000020AD9A /* CoreBluetooth.framework */; };
+		3B580BA16165BEFD08CE443B /* Pods_BikeAirQualitySensorsiOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CCA721F61278A92D24B5411A /* Pods_BikeAirQualitySensorsiOS.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -57,6 +58,9 @@
 		2950A9C8164A8459005C150E /* TableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TableViewController.h; sourceTree = "<group>"; };
 		2950A9C9164A8459005C150E /* TableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TableViewController.m; sourceTree = "<group>"; };
 		298C8462164A0F000020AD9A /* CoreBluetooth.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreBluetooth.framework; path = System/Library/Frameworks/CoreBluetooth.framework; sourceTree = SDKROOT; };
+		36189328AD0D3BE39E34C90E /* Pods-BikeAirQualitySensorsiOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BikeAirQualitySensorsiOS.release.xcconfig"; path = "Pods/Target Support Files/Pods-BikeAirQualitySensorsiOS/Pods-BikeAirQualitySensorsiOS.release.xcconfig"; sourceTree = "<group>"; };
+		9595494C8C7180E46FB35774 /* Pods-BikeAirQualitySensorsiOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BikeAirQualitySensorsiOS.debug.xcconfig"; path = "Pods/Target Support Files/Pods-BikeAirQualitySensorsiOS/Pods-BikeAirQualitySensorsiOS.debug.xcconfig"; sourceTree = "<group>"; };
+		CCA721F61278A92D24B5411A /* Pods_BikeAirQualitySensorsiOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_BikeAirQualitySensorsiOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -70,6 +74,7 @@
 				291C7BB71648AE9100403B08 /* UIKit.framework in Frameworks */,
 				291C7BB91648AE9100403B08 /* Foundation.framework in Frameworks */,
 				291C7BBB1648AE9100403B08 /* CoreGraphics.framework in Frameworks */,
+				3B580BA16165BEFD08CE443B /* Pods_BikeAirQualitySensorsiOS.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -86,6 +91,7 @@
 				291C7BBC1648AE9100403B08 /* BikeAirQualitySensorsiOS */,
 				291C7BB51648AE9100403B08 /* Frameworks */,
 				291C7BB31648AE9100403B08 /* Products */,
+				E20DEB1FB9ED67A3B92022FB /* Pods */,
 			);
 			sourceTree = "<group>";
 		};
@@ -107,6 +113,7 @@
 				291C7BB61648AE9100403B08 /* UIKit.framework */,
 				291C7BB81648AE9100403B08 /* Foundation.framework */,
 				291C7BBA1648AE9100403B08 /* CoreGraphics.framework */,
+				CCA721F61278A92D24B5411A /* Pods_BikeAirQualitySensorsiOS.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -151,6 +158,15 @@
 			path = ../../../../BLEFramework/BLE;
 			sourceTree = "<group>";
 		};
+		E20DEB1FB9ED67A3B92022FB /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				9595494C8C7180E46FB35774 /* Pods-BikeAirQualitySensorsiOS.debug.xcconfig */,
+				36189328AD0D3BE39E34C90E /* Pods-BikeAirQualitySensorsiOS.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -158,9 +174,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 291C7BD61648AE9100403B08 /* Build configuration list for PBXNativeTarget "BikeAirQualitySensorsiOS" */;
 			buildPhases = (
+				09377C736936065020D1546B /* [CP] Check Pods Manifest.lock */,
 				291C7BAE1648AE9100403B08 /* Sources */,
 				291C7BAF1648AE9100403B08 /* Frameworks */,
 				291C7BB01648AE9100403B08 /* Resources */,
+				F254BF758AC60B7BE0BE7E00 /* [CP] Embed Pods Frameworks */,
+				C4C0C0BF3FBB16F5B7B6A948 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -218,6 +237,54 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		09377C736936065020D1546B /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		C4C0C0BF3FBB16F5B7B6A948 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-BikeAirQualitySensorsiOS/Pods-BikeAirQualitySensorsiOS-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		F254BF758AC60B7BE0BE7E00 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-BikeAirQualitySensorsiOS/Pods-BikeAirQualitySensorsiOS-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		291C7BAE1648AE9100403B08 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -261,6 +328,7 @@
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
@@ -293,6 +361,7 @@
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
@@ -314,6 +383,7 @@
 		};
 		291C7BD71648AE9100403B08 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 9595494C8C7180E46FB35774 /* Pods-BikeAirQualitySensorsiOS.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
@@ -334,6 +404,7 @@
 		};
 		291C7BD81648AE9100403B08 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 36189328AD0D3BE39E34C90E /* Pods-BikeAirQualitySensorsiOS.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
