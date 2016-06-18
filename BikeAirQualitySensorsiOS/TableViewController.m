@@ -142,7 +142,7 @@ NSTimer *rssiTimer;
     _carbonMonoxide = sensorReadings.carbonMonoxide;
     _heaterOn = sensorReadings.heaterOn;
     
-    _deviceid = 1;
+    _deviceid = 2;
     _timestamp = [NSDate date];
     
     // TODO: Use this graph framework to plot in realtime
@@ -354,7 +354,7 @@ NSTimer *rssiTimer;
     }
     
     locationManager.delegate = self;
-    [locationManager requestWhenInUseAuthorization];
+    [locationManager requestAlwaysAuthorization];
     locationManager.desiredAccuracy = kCLLocationAccuracyBest;
     locationManager.pausesLocationUpdatesAutomatically = YES;
     [locationManager setActivityType:CLActivityTypeFitness];
@@ -362,10 +362,10 @@ NSTimer *rssiTimer;
     // Set a movement threshold for new events.
     locationManager.distanceFilter = 5; // meters
     
-    [locationManager requestLocation];
+//    [locationManager requestLocation];
     
     [locationManager startUpdatingLocation];
-    [locationManager startMonitoringSignificantLocationChanges];
+//    [locationManager startMonitoringSignificantLocationChanges];
     
 }
 
