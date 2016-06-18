@@ -553,16 +553,30 @@ static int rssi = 0;
     }
 }
 
-- (void)peripheralDidUpdateRSSI:(CBPeripheral *)peripheral error:(NSError *)error
+// TODO: Check if this works?
+
+- (void)peripheral:(CBPeripheral *)peripheral didReadRSSI:(NSNumber *)RSSI error:(NSError *)error
 {
     if (!isConnected)
         return;
     
-    if (rssi != peripheral.RSSI.intValue)
+    if (rssi != RSSI.intValue)
     {
-        rssi = peripheral.RSSI.intValue;
-        [[self delegate] bleDidUpdateRSSI:activePeripheral.RSSI];
+        rssi = RSSI.intValue;
+        [[self delegate] bleDidUpdateRSSI:RSSI];
     }
 }
+
+//- (void)peripheralDidUpdateRSSI:(CBPeripheral *)peripheral error:(NSError *)error
+//{
+//    if (!isConnected)
+//        return;
+//    
+//    if (rssi != peripheral.RSSI.intValue)
+//    {
+//        rssi = peripheral.RSSI.intValue;
+//        [[self delegate] bleDidUpdateRSSI:activePeripheral.RSSI];
+//    }
+//}
 
 @end
