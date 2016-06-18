@@ -14,7 +14,7 @@
 
 #import "BIKSensorDataMO+CoreDataProperties.h"
 
-@interface TableViewController : UITableViewController <BLEDelegate, CLLocationManagerDelegate>
+@interface TableViewController : UITableViewController <BLEDelegate>
 {
     IBOutlet UIButton *btnConnect;
     IBOutlet UIActivityIndicatorView *indConnecting;
@@ -23,7 +23,7 @@
     IBOutlet UILabel *sensorValues;
 //    IBOutlet LineChartView *lineChart;
     
-    CLLocationManager *locationManager;
+//    CLLocationManager *locationManager;
 }
 
 @property (strong, nonatomic) BLE *ble;

@@ -44,7 +44,6 @@
     if (self) {
         // Setup CoreData
         [self initializeCoreData];
-        [self initializeCoreLocation];
         
         // Disable app sleeping
         [[UIApplication sharedApplication] setIdleTimerDisabled:YES];
@@ -59,6 +58,12 @@
     ble = [[BLE alloc] init];
     [ble controlSetup];
     ble.delegate = self;
+    
+    // Register for location updates
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(locationUpdated:) name:@"locationUpdated" object:nil];
+    
+    // Check for background location use..
+    [self checkLocationServices];
 }
 
 - (void)didReceiveMemoryWarning
@@ -347,37 +352,10 @@ NSTimer *rssiTimer;
 
 # pragma mark - CoreLocation
 
--(void)initializeCoreLocation
-{
-    if (locationManager == nil) {
-        locationManager = [[CLLocationManager alloc] init];
-    }
-    
-    locationManager.delegate = self;
-    [locationManager requestWhenInUseAuthorization];
-    locationManager.desiredAccuracy = kCLLocationAccuracyBest;
-    locationManager.pausesLocationUpdatesAutomatically = YES;
-    [locationManager setActivityType:CLActivityTypeFitness];
-    
-    // Set a movement threshold for new events.
-    locationManager.distanceFilter = 5; // meters
-    
-    [locationManager requestLocation];
-    
-    [locationManager startUpdatingLocation];
-    [locationManager startMonitoringSignificantLocationChanges];
-    
-}
-
--(void)locationManager:(CLLocationManager *)manager didDetermineState:(CLRegionState)state forRegion:(CLRegion *)region
-{
-    NSLog(@"Location manager state: %ld, region: %@", (long)state, region);
-}
-
--(void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray *)locations
+-(void)locationUpdated:(NSNotification *) notification
 {
     // If it's a relatively recent event, turn off updates to save power.
-    CLLocation *location = [locations lastObject];
+    CLLocation *location = [notification.object lastObject];
     _latitude = location.coordinate.latitude;
     _longitude = location.coordinate.longitude;
     NSDate *eventDate = location.timestamp;
@@ -393,9 +371,21 @@ NSTimer *rssiTimer;
     }
 }
 
--(void)locationManager:(CLLocationManager *)manager didFailWithError:(NSError *)error
+-(void)checkLocationServices
 {
-    NSLog(@"Location manager error: %@", error);
+    CLAuthorizationStatus status = [CLLocationManager authorizationStatus];
+    if (status == kCLAuthorizationStatusAuthorizedWhenInUse || status == kCLAuthorizationStatusDenied) {
+        NSString *title;
+        title = (status == kCLAuthorizationStatusDenied) ? @"Location services are off" : @"Background location is not enabled";
+        NSString *message = @"To use background location you must turn on 'Always' in the Location Services Settings";
+        
+        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:title
+                                                            message:message
+                                                           delegate:self
+                                                  cancelButtonTitle:@"Cancel"
+                                                  otherButtonTitles:@"Settings", nil];
+        [alertView show];
+    }
 }
 
 @end
