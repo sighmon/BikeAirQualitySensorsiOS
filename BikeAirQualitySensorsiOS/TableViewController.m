@@ -145,12 +145,15 @@ NSTimer *rssiTimer;
     _carbonMonoxide = sensorReadings.carbonMonoxide;
     _heaterOn = sensorReadings.heaterOn;
     
-    _deviceid = 1;
+    _deviceid = 2;
     _timestamp = [NSDate date];
     
     // TODO: Use this graph framework to plot in realtime
     // http://www.appcoda.com/ios-charts-api-tutorial/
     // https://github.com/danielgindi/ios-charts
+    
+    // TODO: Trying out this graph software
+    // https://github.com/Boris-Em/BEMSimpleLineGraph
     
     sensorValues.text = [NSString stringWithFormat:@"t: %.01f h: %.01f p: %.01f %@: %.01f",
                          _temperature,
