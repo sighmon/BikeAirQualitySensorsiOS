@@ -59,6 +59,12 @@
     ble = [[BLE alloc] init];
     [ble controlSetup];
     ble.delegate = self;
+    
+    // Stop location updates when app terminates
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(applicationWillTerminate:)
+                                                 name:UIApplicationWillTerminateNotification
+                                               object:nil];
 }
 
 - (void)didReceiveMemoryWarning
@@ -396,6 +402,12 @@ NSTimer *rssiTimer;
 -(void)locationManager:(CLLocationManager *)manager didFailWithError:(NSError *)error
 {
     NSLog(@"Location manager error: %@", error);
+}
+
+- (void)applicationWillTerminate:(NSNotification *)notification {
+    // stop location updates
+    [locationManager stopUpdatingLocation];
+//    [locationManager stopMonitoringSignificantLocationChanges];
 }
 
 @end
