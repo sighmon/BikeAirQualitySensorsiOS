@@ -24,6 +24,8 @@
 
 @end
 
+#define SITE_URL @"http://10.0.1.91:3000/"
+
 @implementation TableViewController
 
 @synthesize ble;
@@ -168,6 +170,7 @@ NSTimer *rssiTimer;
     // Save to core data if the data size is 17 (Arduino) or 20 (Redbear Duo)
     if ([self isLastDataValid] && length >= 17 && length <= 20) {
         [self saveToCoreData];
+        [self sendToServer];
     }
     
 }
@@ -331,6 +334,40 @@ NSTimer *rssiTimer;
     } else {
         NSLog(@"Saved sensor data: %@", sensorDataManagedObject);
     }
+}
+
+- (void)sendToServer
+{
+    NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
+    [request setURL:[NSURL URLWithString:[NSString stringWithFormat:@"readings"] relativeToURL:[NSURL URLWithString:SITE_URL]]];
+    [request setHTTPMethod:@"POST"];
+    [request setValue:@"application/x-www-form-urlencoded" forHTTPHeaderField:@"Content-Type"];
+    NSData *postData = [[NSString stringWithFormat:
+                         @"reading[temperature]=%f&reading[humidity]=%f&reading[particles]=%f&reading[carbon_monoxide]=%f&reading[heater_on]=%c&reading[device_id]=%d&reading[timestamp]=%@&reading[latitude]=%f&reading[longitude]=%f",
+                         _temperature,
+                         _humidity,
+                         _particles,
+                         _carbonMonoxide,
+                         _heaterOn,
+                         _deviceid,
+                         _timestamp,
+                         _latitude,
+                         _longitude] dataUsingEncoding:NSUTF8StringEncoding];
+    NSString *postLength = [NSString stringWithFormat:@"%d", (int)[postData length]];
+    [request setValue:postLength forHTTPHeaderField:@"Content-Length"];
+    [request setHTTPBody:postData];
+    
+    NSError *error;
+    NSHTTPURLResponse *response;
+    [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&error];
+    int statusCode = (int)[response statusCode];
+    if (statusCode >= 200 && statusCode < 300) {
+        // Send successful login notification
+        NSLog(@"Successfully sent data to server.");
+    } else {
+        NSLog(@"ERROR: failed to send data to server. Response: %@", response);
+    }
+
 }
 
 # pragma mark - convinience functions
