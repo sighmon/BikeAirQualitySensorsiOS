@@ -24,7 +24,7 @@
 
 @end
 
-#define SITE_URL @"http://10.0.1.91:3000/"
+#define SITE_URL @"http://192.168.1.124:3000/"
 
 @implementation TableViewController
 
@@ -156,6 +156,14 @@ NSTimer *rssiTimer;
     // TODO: Use this graph framework to plot in realtime
     // http://www.appcoda.com/ios-charts-api-tutorial/
     // https://github.com/danielgindi/ios-charts
+    
+    // Catch temperature sensor reading errors, it defaults to -999 which isn't ideal.
+    if (_temperature < -100) {
+        _temperature = 0;
+    }
+    if (_humidity < -100) {
+        _humidity = 0;
+    }
     
     sensorValues.text = [NSString stringWithFormat:@"t: %.01f h: %.01f p: %.01f %@: %.01f",
                          _temperature,
