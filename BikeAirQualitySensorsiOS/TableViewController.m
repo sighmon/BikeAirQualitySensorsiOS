@@ -21,6 +21,8 @@
     NSDate *_timestamp;
     double _latitude;
     double _longitude;
+    
+    UIColor *defaultTextColor;
 }
 
 @end
@@ -28,6 +30,10 @@
 #define SITE_URL @"http://192.168.1.124:3000/"
 #define DOT_COLOR_ON [UIColor redColor]
 #define DOT_COLOR_OFF [UIColor greenColor]
+#define PARTICLES_MAX 600
+#define CARBON_MONOXIDE_MAX 1024
+#define COLOR_BAD [UIColor redColor]
+#define COLOR_WARN [UIColor orangeColor]
 
 @implementation TableViewController
 
@@ -75,6 +81,7 @@
     heaterDot.layer.cornerRadius = heaterDot.frame.size.width/2;
     heaterDot.layer.borderColor = DOT_COLOR_OFF.CGColor;
     heaterDot.layer.borderWidth = 2.0;
+    defaultTextColor = particlesLabel.textColor;
 }
 
 - (void)didReceiveMemoryWarning
@@ -198,8 +205,13 @@ NSTimer *rssiTimer;
 - (void)updateDisplay
 {
     carbonMonoxideLabel.text = [NSString stringWithFormat:@"%d", (int)roundf(_carbonMonoxide)];
+    [self updateTextColorWithLabel:carbonMonoxideLabel andLabelMaxValue:CARBON_MONOXIDE_MAX andData:_carbonMonoxide];
+    
     particlesLabel.text = [NSString stringWithFormat:@"%d", (int)roundf(_particles)];
+    [self updateTextColorWithLabel:particlesLabel andLabelMaxValue:PARTICLES_MAX andData:_particles];
+    
     temperatureLabel.text = [NSString stringWithFormat:@"%.01f°", _temperature];
+    
     humidityLabel.text = [NSString stringWithFormat:@"%.01f%%", _humidity];
     
     UIColor *heaterDotColour = [UIColor whiteColor];
@@ -210,6 +222,17 @@ NSTimer *rssiTimer;
         heaterDot.layer.borderColor = DOT_COLOR_OFF.CGColor;
     }
     heaterDot.backgroundColor = heaterDotColour;
+}
+
+- (void)updateTextColorWithLabel: (UILabel *)label andLabelMaxValue: (float)maxValue andData: (float)dataValue
+{
+    if (dataValue > (maxValue * 0.75)) {
+        label.textColor = COLOR_BAD;
+    } else if (dataValue > (maxValue * 0.5)) {
+        label.textColor = COLOR_WARN;
+    } else {
+        label.textColor = defaultTextColor;
+    }
 }
 
 #pragma mark - Actions
