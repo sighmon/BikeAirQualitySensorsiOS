@@ -99,7 +99,7 @@ NSTimer *rssiTimer;
     carbonMonoxideLabel.text = @"0";
     particlesLabel.text = @"0";
     temperatureLabel.text = @"0°";
-    humidityLabel.text = @"0";
+    humidityLabel.text = @"0%";
 //    sensorValues.text = @"t: --- h: --- s: --- *---*";
     
     [rssiTimer invalidate];
