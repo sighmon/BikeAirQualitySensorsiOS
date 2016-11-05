@@ -20,7 +20,11 @@
     IBOutlet UIActivityIndicatorView *indConnecting;
     IBOutlet UILabel *lblRSSI;
     IBOutlet UIProgressView *rssiProgressView;
-    IBOutlet UILabel *sensorValues;
+    IBOutlet UILabel *carbonMonoxideLabel;
+    IBOutlet UILabel *particlesLabel;
+    IBOutlet UILabel *temperatureLabel;
+    IBOutlet UILabel *humidityLabel;
+    IBOutlet UIView *heaterDot;
 //    IBOutlet LineChartView *lineChart;
     
     CLLocationManager *locationManager;

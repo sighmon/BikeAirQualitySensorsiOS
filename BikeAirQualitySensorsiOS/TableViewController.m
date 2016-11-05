@@ -7,6 +7,7 @@
 //
 
 #import "TableViewController.h"
+#import <QuartzCore/QuartzCore.h>
 
 @interface TableViewController () {
     
@@ -25,6 +26,8 @@
 @end
 
 #define SITE_URL @"http://192.168.1.124:3000/"
+#define DOT_COLOR_ON [UIColor redColor]
+#define DOT_COLOR_OFF [UIColor greenColor]
 
 @implementation TableViewController
 
@@ -67,6 +70,11 @@
                                              selector:@selector(applicationWillTerminate:)
                                                  name:UIApplicationWillTerminateNotification
                                                object:nil];
+    
+    // Setup heater view
+    heaterDot.layer.cornerRadius = heaterDot.frame.size.width/2;
+    heaterDot.layer.borderColor = DOT_COLOR_OFF.CGColor;
+    heaterDot.layer.borderWidth = 2.0;
 }
 
 - (void)didReceiveMemoryWarning
@@ -88,7 +96,11 @@ NSTimer *rssiTimer;
     
     lblRSSI.text = @"---";
     [rssiProgressView setProgress:0.1 animated:YES];
-    sensorValues.text = @"t: --- h: --- s: --- *---*";
+    carbonMonoxideLabel.text = @"0";
+    particlesLabel.text = @"0";
+    temperatureLabel.text = @"0°";
+    humidityLabel.text = @"0";
+//    sensorValues.text = @"t: --- h: --- s: --- *---*";
     
     [rssiTimer invalidate];
 }
@@ -165,15 +177,15 @@ NSTimer *rssiTimer;
         _humidity = 0;
     }
     
-    sensorValues.text = [NSString stringWithFormat:@"t: %.01f h: %.01f p: %.01f %@: %.01f",
-                         _temperature,
-                         _humidity,
-                         _particles,
-                         _heaterOn ? @"C" : @"c",
-                         _carbonMonoxide];
+    [self updateDisplay];
     
     NSLog(@"Length: %d, Raw data: %s", length, data);
-    NSLog(@"Data: %@", sensorValues.text);
+    NSLog(@"Data: %@", [NSString stringWithFormat:@"t: %.01f h: %.01f p: %.01f %@: %.01f",
+                        _temperature,
+                        _humidity,
+                        _particles,
+                        _heaterOn ? @"C" : @"c",
+                        _carbonMonoxide]);
     
     // Save to core data if the data size is 17 (Arduino) or 20 (Redbear Duo)
     if ([self isLastDataValid] && length >= 17 && length <= 20) {
@@ -181,6 +193,23 @@ NSTimer *rssiTimer;
         [self sendToServer];
     }
     
+}
+
+- (void)updateDisplay
+{
+    carbonMonoxideLabel.text = [NSString stringWithFormat:@"%d", (int)roundf(_carbonMonoxide)];
+    particlesLabel.text = [NSString stringWithFormat:@"%d", (int)roundf(_particles)];
+    temperatureLabel.text = [NSString stringWithFormat:@"%.01f°", _temperature];
+    humidityLabel.text = [NSString stringWithFormat:@"%.01f%%", _humidity];
+    
+    UIColor *heaterDotColour = [UIColor whiteColor];
+    if (_heaterOn) {
+        heaterDotColour = DOT_COLOR_ON;
+        heaterDot.layer.borderColor = DOT_COLOR_ON.CGColor;
+    } else {
+        heaterDot.layer.borderColor = DOT_COLOR_OFF.CGColor;
+    }
+    heaterDot.backgroundColor = heaterDotColour;
 }
 
 #pragma mark - Actions
