@@ -27,7 +27,7 @@
 
 @end
 
-#define SITE_URL @"http://192.168.1.124:3000/"
+#define SITE_URL @"http://192.168.1.3:3000"
 #define DOT_COLOR_ON [UIColor redColor]
 #define DOT_COLOR_OFF [UIColor greenColor]
 #define PARTICLES_MAX 600
@@ -417,16 +417,23 @@ NSTimer *rssiTimer;
     [request setValue:postLength forHTTPHeaderField:@"Content-Length"];
     [request setHTTPBody:postData];
     
-    NSError *error;
-    NSHTTPURLResponse *response;
-    [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&error];
-    int statusCode = (int)[response statusCode];
-    if (statusCode >= 200 && statusCode < 300) {
-        // Send successful login notification
-        NSLog(@"Successfully sent data to server.");
-    } else {
-        NSLog(@"ERROR: failed to send data to server. Response: %@", response);
-    }
+    [[[NSURLSession sharedSession] dataTaskWithRequest:request completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
+        if (error) {
+            NSLog(@"ERROR! Response: %@", response);
+            NSLog(@"Error: %@", error);
+        } else {
+//            NSLog(@"Response: %@", response);
+            if ([response isKindOfClass:[NSHTTPURLResponse class]]) {
+                
+                NSInteger statusCode = [(NSHTTPURLResponse *)response statusCode];
+                if (statusCode != 200) {
+                    NSLog(@"Response HTTP status code: %d", statusCode);
+                } else {
+                    NSLog(@"Successfully sent data to server.");
+                }
+            }
+        }
+    }] resume];
 
 }
 
