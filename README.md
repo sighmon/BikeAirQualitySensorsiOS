@@ -1,5 +1,7 @@
 # Bike air quality sensors iOS
 
+<img src="https://raw.githubusercontent.com/sighmon/BikeAirQualitySensorsiOS/iOS-screenshot.jpg" width="100%" />
+
 This is a Bluetooth 4 (BLE) iOS app that receives air quality data from a corresponding [Arduino project](https://github.com/sighmon/bike_air_quality_sensors), adds a timestamp and GPS coordinates, and saves that data to a file/website.
 
 ## Air quality data

@@ -427,7 +427,7 @@ NSTimer *rssiTimer;
                 
                 NSInteger statusCode = [(NSHTTPURLResponse *)response statusCode];
                 if (statusCode != 200) {
-                    NSLog(@"Response HTTP status code: %d", statusCode);
+                    NSLog(@"Response HTTP status code: %ld", (long)statusCode);
                 } else {
                     NSLog(@"Successfully sent data to server.");
                 }
