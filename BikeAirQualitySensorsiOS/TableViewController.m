@@ -23,17 +23,10 @@
     double _longitude;
     
     UIColor *defaultTextColor;
+    NSString *serverIpAddress;
 }
 
 @end
-
-#define SITE_URL @"http://192.168.1.3:3000"
-#define DOT_COLOR_ON [UIColor redColor]
-#define DOT_COLOR_OFF [UIColor greenColor]
-#define PARTICLES_MAX 600
-#define CARBON_MONOXIDE_MAX 1024
-#define COLOR_BAD [UIColor redColor]
-#define COLOR_WARN [UIColor orangeColor]
 
 @implementation TableViewController
 
@@ -82,6 +75,20 @@
     heaterDot.layer.borderColor = DOT_COLOR_OFF.CGColor;
     heaterDot.layer.borderWidth = 2.0;
     defaultTextColor = particlesLabel.textColor;
+    
+    // Setup user defaults
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    BOOL useTestServer = [defaults boolForKey:kTestSwitchPreference];
+    serverIpAddress = [defaults objectForKey:kTestIpAddressPreference];
+    if (!serverIpAddress) {
+        serverIpAddress = kTestServerAddress;
+        [defaults setObject:serverIpAddress forKey:kTestIpAddressPreference];
+        [defaults synchronize];
+    }
+    if (!useTestServer) {
+        // Real server address..
+        serverIpAddress = kRealServerAddress;
+    }
 }
 
 - (void)didReceiveMemoryWarning
@@ -108,6 +115,8 @@ NSTimer *rssiTimer;
     temperatureLabel.text = @"0°";
     humidityLabel.text = @"0%";
 //    sensorValues.text = @"t: --- h: --- s: --- *---*";
+    [self updateTextColorWithLabel:carbonMonoxideLabel andLabelMaxValue:CARBON_MONOXIDE_MAX andData:0];
+    [self updateTextColorWithLabel:particlesLabel andLabelMaxValue:PARTICLES_MAX andData:0];
     
     [rssiTimer invalidate];
 }
@@ -399,7 +408,7 @@ NSTimer *rssiTimer;
 - (void)sendToServer
 {
     NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
-    [request setURL:[NSURL URLWithString:[NSString stringWithFormat:@"readings"] relativeToURL:[NSURL URLWithString:SITE_URL]]];
+    [request setURL:[NSURL URLWithString:[NSString stringWithFormat:@"readings"] relativeToURL:[NSURL URLWithString:serverIpAddress]]];
     [request setHTTPMethod:@"POST"];
     [request setValue:@"application/x-www-form-urlencoded" forHTTPHeaderField:@"Content-Type"];
     NSData *postData = [[NSString stringWithFormat:

@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0566B4D51DE1929100117768 /* SettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0566B4D41DE1929100117768 /* SettingsViewController.m */; };
+		0566B4D71DE1945300117768 /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 0566B4D61DE1945300117768 /* Settings.bundle */; };
 		056B7D571BC2313D00292D37 /* SensorData.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 056B7D551BC2313D00292D37 /* SensorData.xcdatamodeld */; };
 		056B7D591BC23E4100292D37 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 056B7D581BC23E4100292D37 /* CoreData.framework */; };
 		056B7D5E1BC25B6700292D37 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 056B7D5D1BC25B6700292D37 /* CoreLocation.framework */; };
@@ -29,6 +31,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		0566B4D31DE1929100117768 /* SettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingsViewController.h; sourceTree = "<group>"; };
+		0566B4D41DE1929100117768 /* SettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingsViewController.m; sourceTree = "<group>"; };
+		0566B4D61DE1945300117768 /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
 		056B7D561BC2313D00292D37 /* SensorData.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = SensorData.xcdatamodel; sourceTree = "<group>"; };
 		056B7D581BC23E4100292D37 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		056B7D5D1BC25B6700292D37 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
@@ -36,6 +41,7 @@
 		056B7D631BC2731C00292D37 /* BIKSensorDataMO+CoreDataProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "BIKSensorDataMO+CoreDataProperties.m"; path = "BikeAirQualitySensorsiOS/BIKSensorDataMO+CoreDataProperties.m"; sourceTree = "<group>"; };
 		056B7D641BC2731C00292D37 /* BIKSensorDataMO.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BIKSensorDataMO.h; path = BikeAirQualitySensorsiOS/BIKSensorDataMO.h; sourceTree = "<group>"; };
 		056B7D651BC2731C00292D37 /* BIKSensorDataMO.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BIKSensorDataMO.m; path = BikeAirQualitySensorsiOS/BIKSensorDataMO.m; sourceTree = "<group>"; };
+		057F51271DE94435005E8D25 /* Constants.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Constants.h; sourceTree = "<group>"; };
 		05D0469E1BD3DEED00391727 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		291C7BB21648AE9100403B08 /* BikeAirQualitySensorsiOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BikeAirQualitySensorsiOS.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		291C7BB61648AE9100403B08 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
@@ -79,6 +85,7 @@
 		291C7BA71648AE9100403B08 = {
 			isa = PBXGroup;
 			children = (
+				0566B4D61DE1945300117768 /* Settings.bundle */,
 				056B7D621BC2731C00292D37 /* BIKSensorDataMO+CoreDataProperties.h */,
 				056B7D631BC2731C00292D37 /* BIKSensorDataMO+CoreDataProperties.m */,
 				056B7D641BC2731C00292D37 /* BIKSensorDataMO.h */,
@@ -114,8 +121,11 @@
 		291C7BBC1648AE9100403B08 /* BikeAirQualitySensorsiOS */ = {
 			isa = PBXGroup;
 			children = (
+				057F51271DE94435005E8D25 /* Constants.h */,
 				2950A9C8164A8459005C150E /* TableViewController.h */,
 				2950A9C9164A8459005C150E /* TableViewController.m */,
+				0566B4D31DE1929100117768 /* SettingsViewController.h */,
+				0566B4D41DE1929100117768 /* SettingsViewController.m */,
 				056B7D551BC2313D00292D37 /* SensorData.xcdatamodeld */,
 				291C7BC51648AE9100403B08 /* AppDelegate.h */,
 				291C7BC61648AE9100403B08 /* AppDelegate.m */,
@@ -213,6 +223,7 @@
 				05D0469F1BD3DEED00391727 /* Images.xcassets in Resources */,
 				291C7BCD1648AE9100403B08 /* Default-568h@2x.png in Resources */,
 				291C7BD01648AE9100403B08 /* MainStoryboard.storyboard in Resources */,
+				0566B4D71DE1945300117768 /* Settings.bundle in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -226,6 +237,7 @@
 				291C7BC31648AE9100403B08 /* main.m in Sources */,
 				291C7BC71648AE9100403B08 /* AppDelegate.m in Sources */,
 				056B7D661BC2731C00292D37 /* BIKSensorDataMO+CoreDataProperties.m in Sources */,
+				0566B4D51DE1929100117768 /* SettingsViewController.m in Sources */,
 				2950A9CA164A8459005C150E /* TableViewController.m in Sources */,
 				2932F6831813C4230049385E /* BLE.m in Sources */,
 				056B7D671BC2731C00292D37 /* BIKSensorDataMO.m in Sources */,

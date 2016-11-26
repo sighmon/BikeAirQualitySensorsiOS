@@ -11,6 +11,7 @@
 #import "BLE.h"
 #import <CoreData/CoreData.h>
 #import <CoreLocation/CoreLocation.h>
+#import "Constants.h"
 
 #import "BIKSensorDataMO+CoreDataProperties.h"
 
