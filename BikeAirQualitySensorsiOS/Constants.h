@@ -10,7 +10,7 @@
 #define Constants_h
 
 #define kRealServerAddress @"https://bikelab.org"
-#define kTestServerAddress @"http://172.20.10.5:3000"
+#define kTestServerAddress @"http://192.168.1.100:3000"
 #define kTestIpAddressPreference @"test_ip_preference"
 #define kTestSwitchPreference @"test_preference"
 #define DOT_COLOR_ON [UIColor redColor]

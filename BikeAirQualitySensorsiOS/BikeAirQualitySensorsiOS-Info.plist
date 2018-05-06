@@ -28,7 +28,7 @@
 	<string>1.0</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
-	<key>NSLocationAlwaysUsageDescription</key>
+	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
 	<string>This app uses your location to log where the sensor data was sourced.</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string>This app uses your location to log where the sensor data was sourced.</string>
