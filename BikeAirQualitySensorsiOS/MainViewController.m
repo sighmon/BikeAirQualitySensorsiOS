@@ -6,10 +6,10 @@
 //  Copyright (c) 2012 RedBearLab. All rights reserved.
 //
 
-#import "TableViewController.h"
+#import "MainViewController.h"
 #import <QuartzCore/QuartzCore.h>
 
-@interface TableViewController () {
+@interface MainViewController () {
     
     float _temperature;
     float _humidity;
@@ -28,19 +28,9 @@
 
 @end
 
-@implementation TableViewController
+@implementation MainViewController
 
 @synthesize ble;
-
-- (id)initWithStyle:(UITableViewStyle)style
-{
-    self = [super initWithStyle:style];
-    if (self) {
-        // Custom initialization
-        
-    }
-    return self;
-}
 
 -(id)initWithCoder:(NSCoder *)aDecoder
 {

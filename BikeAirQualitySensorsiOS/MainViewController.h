@@ -15,7 +15,7 @@
 
 #import "BIKSensorDataMO+CoreDataProperties.h"
 
-@interface TableViewController : UITableViewController <BLEDelegate, CLLocationManagerDelegate>
+@interface MainViewController : UIViewController <BLEDelegate, CLLocationManagerDelegate>
 {
     IBOutlet UIButton *btnConnect;
     IBOutlet UIActivityIndicatorView *indConnecting;
