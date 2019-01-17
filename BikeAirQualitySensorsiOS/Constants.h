@@ -9,7 +9,7 @@
 #ifndef Constants_h
 #define Constants_h
 
-#define kRealServerAddress @"https://bikelab.org"
+#define kRealServerAddress @"https://bikeadl.org"
 #define kTestServerAddress @"http://192.168.1.100:3000"
 #define kTestIpAddressPreference @"test_ip_preference"
 #define kTestSwitchPreference @"test_preference"
@@ -19,5 +19,6 @@
 #define CARBON_MONOXIDE_MAX 1024
 #define COLOR_BAD [UIColor redColor]
 #define COLOR_WARN [UIColor orangeColor]
+#define DEVICE_ID 3
 
 #endif /* Constants_h */

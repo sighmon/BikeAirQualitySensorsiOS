@@ -120,7 +120,6 @@
                                     <color key="titleShadowColor" red="0.5" green="0.5" blue="0.5" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
                                 <connections>
-                                    <action selector="btnScanForPeripherals:" destination="uKs-Jx-npD" eventType="touchUpInside" id="fcC-dO-USN"/>
                                     <action selector="exportToCSV:" destination="uKs-Jx-npD" eventType="touchUpInside" id="Opf-bd-cdm"/>
                                 </connections>
                             </button>

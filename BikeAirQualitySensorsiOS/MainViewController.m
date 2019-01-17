@@ -168,7 +168,7 @@ NSTimer *rssiTimer;
     _carbonMonoxide = sensorReadings.carbonMonoxide;
     _heaterOn = sensorReadings.heaterOn;
     
-    _deviceid = 2;
+    _deviceid = DEVICE_ID;
     _timestamp = [NSDate date];
     
     // TODO: Use this graph framework to plot in realtime

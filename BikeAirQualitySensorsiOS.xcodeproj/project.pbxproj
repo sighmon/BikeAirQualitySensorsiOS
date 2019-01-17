@@ -161,7 +161,7 @@
 				2932F6821813C4230049385E /* BLEDefines.h */,
 			);
 			name = BLE;
-			path = ../../../../BLEFramework/BLE;
+			path = BikeAirQualitySensorsiOS/BLE;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
